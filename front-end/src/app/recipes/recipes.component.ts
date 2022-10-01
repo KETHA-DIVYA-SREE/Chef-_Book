@@ -6,11 +6,15 @@ import { RecipeService } from './recipe.service';
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.scss'],
-  providers: [RecipeService]
+  providers: [RecipeService],
 })
 export class RecipesComponent implements OnInit {
   selectedRecipe!: Recipe;
 
-  constructor() {}
-  ngOnInit(): void {}
+  constructor(private _recipeService: RecipeService) {}
+  ngOnInit(): void {
+    this._recipeService.recipeSelected.subscribe((recipe: Recipe) => {
+      this.selectedRecipe = recipe;
+    });
+  }
 }
